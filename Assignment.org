@@ -1,0 +1,102 @@
+#+title: Grafisk andengradsligningsløser udviklet i =pyside6=
+#+subtitle: Programmering
+#+author: Vibenshus Gymnasium
+
+* Introduktion
+Som den første simple opgave udi udvikling af grafiske brugerflader er en simpel andengradsligningsløser. I kender allerede matematikken bag, så det burde ikke volde jer problemer. :)
+Her er essensen dog alligevel.
+
+$$a \cdot x^2 + b \cdot x + c = 0$$
+
+$$d = b^2- 4 \cdot a \cdot c$$ 
+
+$$x = \frac{-b \pm \sqrt{d}}{2 \cdot a}$$
+
+I stedet skal I bruge jeres energi på design og implementering af en grafisk brugerflade. En del af udviklingprocessen af grafiske brugerflader er at sætte sig ned med *papir og blyant* og tegne forskellige designs.
+
+* Udvikling af grafisk design
+
+Sæt jer ned med et stykke papir (eller flere) og en blyant, og tegn et tomt vindue. Overvej hvilke grafiske =widgets=, der skal være i vinduet for at få et brugbart program. For at gøre udviklingsprocessen mere håndgribelig er her en række spørgsmål, I kan stille jer selv undervejs:
+
+  - Hvordan skal man kunne indtaste værdierne for a-, b- og c-koefficienter?
+  - Hvordan kan man sikre sig, at der kun kan indtastes tal og ikke tekststrenge?
+  - Hvilke /layouts/ skal anvendes til at holde styr på de forskellige /widgets/?
+  - Hvordan kan man vise brugeren, hvilke widgets der skal bruges til hvad?
+  - Skal der være noget generel information til brugeren, og hvilken widget skal bruges til at vise det?
+  - Hvordan skal brugeren interagere med programmet for at få det til at beregne rødderne til andengradsligningen. Hvilken widget skal anvendes til dette?
+  - Hvordan skal svaret til brugeren præsenteres? I det samme vindue, eller i et pop up-vindue måske?
+  - Hvordan skal de forskellige widgets være placeret i forhold til hinanden? Hvilke layouts kan anvendes til formålet?
+  
+Hvis I svært ved at komme i gang, så bliv inspireret af andre tilsvarende programmer, som f.eks.
+
+[[file:img/2023-03-01_08-55-30_screenshot.png]]
+
+- [[https://www.calculator.net/quadratic-formula-calculator.html]]
+- [[https://www.wolframalpha.com/calculators/quadratic-calculator]]
+- [[https://www.calculatorsoup.com/calculators/algebra/quadratic-formula-calculator.php]]
+
+* Skabelon
+Her er en skabelon, I kan bruge til at komme i gang.
+#+begin_src python :exports both :results none :eval never-export :comments link :tangle skabelon_andengrad.py
+import sys
+
+from PySide6.QtWidgets import (
+    QApplication,
+    QMainWindow,
+    QLabel,
+    QPushButton,
+    QLineEdit,
+    QDoubleSpinBox,
+    QVBoxLayout,
+    QHBoxLayout,
+    QGridLayout,
+    # Tilføj eller fjern selv flere widgets, hvis I vil/ikke vil bruge dem. F.eks. forskellige layouts
+)
+
+
+def reelle_loesninger_til_andengradsligning(a, b, c):
+    """Denne funktion modtager a, b og c-koefficienterne til en andengradsligning sat op på standardform som argumenter og returnerer de reelle løsninger."""
+    # Overvej hvad funktionen skal returnere, naar der er hhv 0, 1 eller 2 loesninger
+    # Skal funktionen returnere faktiske vaerdier, eller bare en tekststreng?
+    pass
+
+
+class HovedVindue(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.opsaetning()
+
+    def opsaetning(self):
+        self.setWindowTitle("Andengradsligningsløser")
+        # Herunder skal oprette de noedvendige widgets
+        # og soerge for at saette dem op i et ordentligt layout.
+        # Herunder skal I saette jeres signaler og slots op
+        # Hvis man har en knap, som hedder self.beregn_knap kan det se nogenlunde
+        # saaledes ud
+        # self.beregn_knap.clicked.connect(self.beregn)
+
+    # Herunder er det en god idé at skrive en metode(funktion), som
+    # - gemmer værdierne for a, b og c
+    # - sender værdierne til funktionen reelle_loesninger_til_andengradsligning
+    # - modtager svaret fra reelle_loesninger_til_andengradsligning
+    # - skriver svaret ud i et eller flere felter.
+    # I kan jo kalde metoden for beregn
+    def beregn(self):
+        pass
+
+
+
+andengradsligningsloeser = QApplication(sys.argv)
+
+vindue = HovedVindue()
+vindue.show()
+
+andengradsligningsloeser.exec()
+#+end_src
+
+
+* Ekstra udfordringer
+Her er nogle forslag til ekstra ud fordringer. I kan garanteret komme på flere selv.
+- Udvikl diverse tjek, informationer og advarsler, så programmet kan køre, selvom brugeren anvender programmet på en uhensigtsmæssig måde.
+- Udvid programmet så det også kan håndtere komplekse løsninger til andengradsligningerne.
+- Tegn en grafisk løsning af andengradsligningen, som supplement til beregningen (kræver f.eks. matplotlib).
