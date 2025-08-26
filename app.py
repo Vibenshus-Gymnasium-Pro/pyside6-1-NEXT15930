@@ -15,7 +15,6 @@ from PySide6.QtUiTools import QUiLoader
 def float_check(a, b, c):
     """This function checks to see that all user inputs are floats, and that the a coefficient isn't 0. NOTE: checking for floats is no longer necessary because the PySide6 program only takes floats as input."""
     if float(a) == 0.0:
-        print("Coefficient a cannot be zero.")
         window.messageBox.setText("Error: Coefficient a cannot be zero.")
         return False
     else:
@@ -31,18 +30,14 @@ def solver(a, b, c):
         sqrt = math.pow(b, 2) - (4 * a * c)
         if sqrt > 0:
             sqrt = math.sqrt(sqrt)
-            print(sqrt)
             plus_answer = ((b * (-1)) + sqrt)/(2 * a)
-            print(plus_answer)
             minus_answer = ((b * (-1)) - sqrt)/(2 * a)
-            print(minus_answer)
 
             # Step 3: Put answers in program
             window.answer1.setNum(plus_answer)
             window.answer2.setNum(minus_answer)
             window.messageBox.setText("Status: No errors.")
         else:
-            print("Not possible")
             window.messageBox.setText("Error: Not possible.")
 
 def mainwindow_setup(w):
