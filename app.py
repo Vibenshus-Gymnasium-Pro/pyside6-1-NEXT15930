@@ -31,11 +31,8 @@ def solver(a, b, c):
         sqrt = math.pow(b, 2) - (4 * a * c)
         if sqrt > 0:
             sqrt = math.sqrt(sqrt)
-            print(sqrt)
             plus_answer = ((b * (-1)) + sqrt)/(2 * a)
-            print(plus_answer)
             minus_answer = ((b * (-1)) - sqrt)/(2 * a)
-            print(minus_answer)
 
             # Step 3: Put answers in program
             window.answer1.setNum(plus_answer)
